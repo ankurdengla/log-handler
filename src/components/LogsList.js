@@ -4,10 +4,12 @@ import { VariableSizeList as VirtualizedList } from 'react-window';
 import { AutoSizer } from 'react-virtualized';
 import LogsStore from '../stores/LogsStore';
 import { findDOMNode } from 'react-dom';
-import _ from 'lodash';
+import { withTheme } from '@material-ui/core/styles';
+import WarningIcon from '@material-ui/icons/Warning';
+import ErrorIcon from '@material-ui/icons/Error';
+import InfoIcon from '@material-ui/icons/Info';
 
 const  MIN_ROW_HEIGHT = 42;
-
 class LogsListItem extends React.Component {
   componentDidMount () {
     this.selfNode = findDOMNode(this);
@@ -19,22 +21,61 @@ class LogsListItem extends React.Component {
   componentWillUnmount () {
     this.props.unobserveSizeChange && this.props.unobserveSizeChange(this.selfNode);
   }
+
+  getLogColor (type) {
+    let palette = this.props.theme.palette, 
+      fontColor;
+
+    switch(type) {
+      case 'error': 
+        fontColor = palette.error.light;
+        break;
+      case 'warn':
+        fontColor = palette.warning.light;
+        break;
+      default:
+        fontColor = palette.text.primary;
+    }
+
+    return fontColor
+  }
+
+  getIcon (type) {
+    switch(type) {
+      case 'error': 
+        return ErrorIcon;
+      case 'warn':
+        return WarningIcon;
+      default:
+        return InfoIcon;
+    }
+  }
   
   render () {
     let logItem = this.props.logItem;
+
+    if (!logItem) {
+      return null;
+    }
+
+    let logColor = this.getLogColor(logItem.type),
+      Icon = this.getIcon(logItem.type);
 
     return (
       <div className="logs-list-item"
         style={this.props.style}
         data-index={this.props.index}
       >
-        <div className="log-text">
+        <Icon color='inherit' style={{color: logColor, padding: 4}}/>
+        <div className="log-text" style={{color: logColor}}>
           {`${logItem.appId}-${logItem.process}-${logItem.timestamp}-${logItem.message}`}
         </div>
       </div>
     )
   }
 }
+
+LogsListItem = withTheme(LogsListItem);
 
 @observer
 class LogsList extends React.Component {
@@ -90,7 +131,9 @@ class LogsList extends React.Component {
   }
 
 	render () {
-    this.logs = LogsStore.mergedLogs;
+    this.logs = LogsStore.mergedLogs.filter((log) => {
+      return LogsStore.filesData[log.filename].isEnabled;
+    });
 
     return (
       <div className='logs-list'>
@@ -100,7 +143,7 @@ class LogsList extends React.Component {
         >
           {({ height, width }) => {
             return (
-              <VirtualizedList
+            <VirtualizedList
               height={height}
               width={width}
               itemCount={this.logs.length}

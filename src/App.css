@@ -6,6 +6,22 @@
   display: flex;
   flex: 1;
   height: 100%;
+  /* background-color: #263238; */
+  font-size: 12px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  max-width: 300px;
+  padding: 12px;
 }
 
 .input-container {
@@ -29,10 +45,26 @@
   flex: 1;
   align-items: center;
   border: solid rgb(170, 168, 168) 1px;
-  min-height: 32px;
   width: 100%;
 }
 
 .log-text {
   padding: 8px 0px;
+}
+
+.inputfile {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.file-input-button {
+  width: 100%;
+}
+
+.file-input-label {
+  cursor: pointer;
 }

@@ -6,9 +6,10 @@ import { v4 } from 'uuid';
 const logPattern = /\[[^\[^\]]*\]/g;
 
 class Log {
-  constructor (props) {
+  constructor (filename, logString) {
     this.id = v4();
-    this.parseLog(props);
+    this.filename = filename;
+    this.parseLog(logString);
   }
 
   parseLog (logString) {
@@ -38,11 +39,33 @@ class LogsStore {
       return;
     }
 
-    this.filesData[fileMeta.name] = this.parseFileData(fileData)
+    this.filesData[fileMeta.name] = { 
+      isEnabled: true,
+      logs: this.parseFileData(fileMeta.name, fileData) 
+    };
+
     this.mergedLogs = this.getMergedLogs();      
   }
 
-  parseFileData(fileData) {
+  @action
+  disableFile (filename) {
+    if (!this.filesData[filename]) {
+      return;
+    }
+
+    this.filesData[filename].isEnabled = false;
+  }
+
+  @action
+  enableFile (filename) {
+    if (!this.filesData[filename]) {
+      return;
+    }
+
+    this.filesData[filename].isEnabled = true;
+  }
+
+  parseFileData(filename, fileData) {
     if (!fileData) {
       return []
     };
@@ -54,14 +77,16 @@ class LogsStore {
           return;
         }
 
-        return new Log(logString);
+        return new Log(filename, logString);
       }));
 
     return parsedLogs;
   }
 
   getMergedLogs () {
-    let logsLists = Object.values(this.filesData),
+    let logsLists = _.compact(Object.values(this.filesData).map((data) => {
+        return data.isEnabled && data.logs;
+      })),
       mergedLogs = [];
 
     for(let i = 0; i < logsLists.length; i++) {
