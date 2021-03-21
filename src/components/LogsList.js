@@ -8,6 +8,7 @@ import { withTheme } from '@material-ui/core/styles';
 import WarningIcon from '@material-ui/icons/Warning';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
+import Chip from '@material-ui/core/Chip';
 
 const  MIN_ROW_HEIGHT = 42;
 class LogsListItem extends React.Component {
@@ -59,16 +60,31 @@ class LogsListItem extends React.Component {
     }
 
     let logColor = this.getLogColor(logItem.type),
-      Icon = this.getIcon(logItem.type);
+      Icon = this.getIcon(logItem.type),
+
+      dateObj = new Date(logItem.timestamp),
+      timestamp = dateObj.toString().split(' GMT')[0],
+      timeWithMilliseconds = `${timestamp}.${dateObj.getMilliseconds().toString().padStart(3, '0')}`;
 
     return (
       <div className="logs-list-item"
         style={this.props.style}
         data-index={this.props.index}
       >
-        <Icon color='inherit' style={{color: logColor, padding: 4}}/>
-        <div className="log-text" style={{color: logColor}}>
-          {`${logItem.appId}-${logItem.process}-${logItem.timestamp}-${logItem.message}`}
+        <div className="log-list-item-section" style={{width: 60}}>
+          {logItem.appId}
+        </div>
+        <div className="log-list-item-section">
+          <Chip label={logItem.process} variant='outlined' size='small' style={{ fontSize: 12, width: 84 }}/>
+        </div>
+        <div className="log-list-item-section">
+          <Icon style={{color: logColor }}/>
+        </div>
+        <div className="log-list-item-section" style={{color: logColor}}>
+          {timeWithMilliseconds}
+        </div>
+        <div className="log-list-item-section" style={{color: logColor, 'flexShrink': 1 }}>
+          {logItem.message}
         </div>
       </div>
     )
@@ -122,8 +138,7 @@ class LogsList extends React.Component {
         logItem={currentItem}
         observeSizeChange={this.observeSizeChange}
         unobserveSizeChange={this.unobserveSizeChange}
-      />
-    );
+      />);
   };
 
   getItemSize (index) {
@@ -149,7 +164,7 @@ class LogsList extends React.Component {
               itemCount={this.logs.length}
               itemSize={this.getItemSize.bind(this)}
               ref={(ref) => { this.listRef = ref}}
-              overscanCount={20}
+              overscanCount={10}
             >
               {this.getListItem.bind(this)}
             </VirtualizedList>

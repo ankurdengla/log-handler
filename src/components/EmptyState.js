@@ -1,7 +1,7 @@
 export default function EmptyState () {
   return (
-    <div>
-      EMPTY
+    <div className='empty-state'>
+      NO LOGS TO DISPLAY
     </div>
   )
 }

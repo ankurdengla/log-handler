@@ -31,6 +31,14 @@ class LogsStore {
 
   constructor() {
     makeObservable(this);
+
+    this.resetStore();
+  }
+
+  @action 
+  resetStore () {
+    this.filesData = {};
+    this.mergedLogs = [];
   }
 
   @action

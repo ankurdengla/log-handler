@@ -12,10 +12,9 @@ export default class FileInput extends React.Component {
 	
 	addListeners () {
 		this.fileInput.addEventListener('change', (e) => {
-			console.log('$$$ change');
 			let filesList = (this.fileInput && this.fileInput.files) || {},
 				numFiles = Object.keys(filesList).length,
-				caption = numFiles > 1 ? `${numFiles} files selected` :  `${numFiles} file selected` ;
+				caption = numFiles > 1 ? `${numFiles} files uploaded` :  `${numFiles} file uploaded` ;
 
 			this.labelSpan.innerText = caption;
 
@@ -46,7 +45,6 @@ export default class FileInput extends React.Component {
 					className='inputfile'
 					ref={(input) => { this.fileInput = input; }}
 					type='file' multiple 
-					data-multiple-caption="{count} files selected"
 				/>
 			<Button
 				className='file-input-button'
