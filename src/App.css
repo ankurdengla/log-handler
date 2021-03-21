@@ -21,11 +21,18 @@
   display: block;
   padding: 4px;
   height: 100%;
+  width: 100%;
 }
 
 .logs-list-item {
   display: flex;
+  flex: 1;
   align-items: center;
   border: solid rgb(170, 168, 168) 1px;
   min-height: 32px;
+  width: 100%;
+}
+
+.log-text {
+  padding: 8px 0px;
 }

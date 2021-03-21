@@ -28,7 +28,9 @@ class LogsListItem extends React.Component {
         style={this.props.style}
         data-index={this.props.index}
       >
-        {`${logItem.appId}-${logItem.process}-${logItem.timestamp}-${logItem.message}`}
+        <div className="log-text">
+          {`${logItem.appId}-${logItem.process}-${logItem.timestamp}-${logItem.message}`}
+        </div>
       </div>
     )
   }
@@ -92,11 +94,15 @@ class LogsList extends React.Component {
 
     return (
       <div className='logs-list'>
-        {/* <AutoSizer>
-          {({ height, width }) => { */}
-            <VirtualizedList
-              height={720}
-              width={1000}
+        <AutoSizer
+          defaultHeight={720}
+          defaultWidth={100}
+        >
+          {({ height, width }) => {
+            return (
+              <VirtualizedList
+              height={height}
+              width={width}
               itemCount={this.logs.length}
               itemSize={this.getItemSize.bind(this)}
               ref={(ref) => { this.listRef = ref}}
@@ -104,8 +110,9 @@ class LogsList extends React.Component {
             >
               {this.getListItem.bind(this)}
             </VirtualizedList>
-         {/* }} */}
-        {/* </AutoSizer> */}
+            );
+         }}
+        </AutoSizer>
       </div>
     );
   }
