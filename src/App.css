@@ -53,6 +53,7 @@
 .log-list-item-section {
   padding: 8px;
   flex-shrink: 0;
+  word-break: break-word;
 }
 
 .inputfile {
