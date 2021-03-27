@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import _ from 'lodash';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import LogsStore from '../../stores/LogsStore';
-import { Checkbox, Collapse, TextField } from '@material-ui/core';
+import { Checkbox, Collapse } from '@material-ui/core';
 import { Info as InfoIcon, ExpandLess, ExpandMore } from '@material-ui/icons';
 
 @observer

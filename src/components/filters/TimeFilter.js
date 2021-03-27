@@ -1,6 +1,5 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import _ from 'lodash';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
