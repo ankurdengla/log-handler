@@ -67,30 +67,21 @@ class LogsStore {
   }
 
   @action
-  disableFile (filename) {
-    if (!this.filesData[filename]) {
-      return;
-    }
-
-    this.filesData[filename].isEnabled = false;
-  }
-
-  @action
-  enableFile (filename) {
-    if (!this.filesData[filename]) {
-      return;
-    }
-
-    this.filesData[filename].isEnabled = true;
-  }
-
-  @action
   updateTimestamp (criteria, timestamp) {
     if (!['from', 'to'].includes(criteria) || !timestamp) {
       return;
     }
 
     this.timestampRange[criteria] = timestamp;
+  }
+
+  @action
+  toggleFileEnabled (filename) {
+    if (!this.filesData[filename]) {
+      return;
+    }
+
+    this.filesData[filename].isEnabled = !this.filesData[filename].isEnabled;
   }
 
   @action

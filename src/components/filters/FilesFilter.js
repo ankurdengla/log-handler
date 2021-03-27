@@ -41,7 +41,7 @@ class FilesFilter extends React.Component {
       return;
     }
 
-    fileData.isEnabled ? LogsStore.disableFile(value) : LogsStore.enableFile(value);
+    LogsStore.toggleFileEnabled(value);
   }
 
   getFilesList (filesData, files) {
