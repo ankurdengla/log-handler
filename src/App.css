@@ -19,6 +19,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  overflow: auto;
   width: 20%;
   max-width: 300px;
   min-width:200px;

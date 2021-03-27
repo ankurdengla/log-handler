@@ -156,9 +156,12 @@ class LogsList extends React.Component {
       // Time Filter
       timeFrom = LogsStore.timestampRange.from === -1 || LogsStore.timestampRange.from < log.timestamp,
       timeTo = LogsStore.timestampRange.to === -1 || LogsStore.timestampRange.to > log.timestamp,
-      timeFilter = timeFrom && timeTo;
+      timeFilter = timeFrom && timeTo,
 
-    return fileFilter && timeFilter;
+      // Log Type filter
+      logTypeFilter = LogsStore.enabledLogType[log.type];
+
+    return fileFilter && timeFilter && logTypeFilter;
   }
 
 	render () {

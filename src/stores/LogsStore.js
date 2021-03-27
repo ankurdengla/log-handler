@@ -29,6 +29,7 @@ class LogsStore {
   @observable filesData;
   @observable mergedLogs;
   @observable timestampRange;
+  @observable enabledLogType;
 
   constructor() {
     makeObservable(this);
@@ -44,6 +45,11 @@ class LogsStore {
       from: -1,
       to: -1
     };
+    this.enabledLogType = {
+      info: true,
+      error: true,
+      warn: true
+    }
   }
 
   @action
@@ -85,6 +91,15 @@ class LogsStore {
     }
 
     this.timestampRange[criteria] = timestamp;
+  }
+
+  @action
+  toggleLogTypeEnabled (type) {
+    if (!['error', 'warn', 'info'].includes(type)) {
+      return;
+    }
+
+    this.enabledLogType[type] = !this.enabledLogType[type];
   }
 
   parseFileData(filename, fileData) {
