@@ -21,6 +21,7 @@ class LogTextFilter extends React.Component {
     this.filterText = '';
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleTextChange = _.debounce(this.handleTextChange.bind(this), 300);
+    this.handleSearch = _.debounce(this.handleSearch.bind(this), 500);
   }
 
   toggleOpen () {
@@ -64,7 +65,7 @@ class LogTextFilter extends React.Component {
               />
               <ListItemSecondaryAction>
                 <IconButton
-                  onClick={this.handleSearch.bind(this)}
+                  onClick={this.handleSearch}
                 >
                   <SearchIcon 
                     fontSize='small'
