@@ -47,25 +47,39 @@ class TimeFilter extends React.Component {
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List dense component="div" style={{paddingLeft: 16}}>
+          <List component="div" style={{paddingLeft: 16}}>
             <ListItem dense>
               <TextField
                 label="From"
                 type="datetime-local"
                 defaultValue="2017-05-24T10:30:00"
+                style={{
+                  paddingTop: 4,
+                  paddingBottom: 4
+                }}
                 inputProps={{
-                  step: 1
+                  step: 1,
+                  style: {
+                    fontSize: 12
+                  }
                 }}
                 onBlur={this.handleDateChange.bind(this, 'from')}
               />
             </ListItem>
-            <ListItem dense>
+            <ListItem>
               <TextField
                 label="To"
                 type="datetime-local"
                 defaultValue="2017-05-24T10:30:00"
+                style={{
+                  paddingTop: 4,
+                  paddingBottom: 4
+                }}
                 inputProps={{
-                  step: 1
+                  step: 1,
+                  style: {
+                    fontSize: 12
+                  }
                 }}
                 onBlur={this.handleDateChange.bind(this, 'to')}
               />

@@ -87,7 +87,7 @@ class FilesFilter extends React.Component {
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List dense component="div" style={{paddingLeft: 16}}>
+          <List component="div" style={{paddingLeft: 16}}>
             {this.getFilesList(filesData, files)}
           </List>
         </Collapse>
