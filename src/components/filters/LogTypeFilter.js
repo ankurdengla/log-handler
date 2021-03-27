@@ -53,7 +53,7 @@ class LogTypeFilter extends React.Component {
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" style={{paddingLeft: 16}}>
+          <List dense component="div" style={{paddingLeft: 16}}>
             <ListItem key='info' dense button onClick={this.handleListItemToggle.bind(this, 'info')}>
               <ListItemIcon>
                 <Checkbox

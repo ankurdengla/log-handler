@@ -9,7 +9,7 @@ class Filters extends React.Component {
     return (
       <List
         subheader={
-          <ListSubheader component="div">
+          <ListSubheader component="div" style={{fontSize: 16}}>
             Filters
           </ListSubheader>
         }

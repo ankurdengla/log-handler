@@ -48,8 +48,8 @@ class TimeFilter extends React.Component {
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" style={{paddingLeft: 16}}>
-            <ListItem >
+          <List dense component="div" style={{paddingLeft: 16}}>
+            <ListItem dense>
               <TextField
                 label="From"
                 type="datetime-local"
@@ -60,7 +60,7 @@ class TimeFilter extends React.Component {
                 onBlur={this.handleDateChange.bind(this, 'from')}
               />
             </ListItem>
-            <ListItem >
+            <ListItem dense>
               <TextField
                 label="To"
                 type="datetime-local"
