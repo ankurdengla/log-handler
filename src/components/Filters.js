@@ -3,6 +3,7 @@ import { List, ListSubheader } from '@material-ui/core';
 import FilesFilter from './filters/FilesFilter'
 import TimeFilter from './filters/TimeFilter';
 import LogTypeFilter from './filters/LogTypeFilter';
+import LogTextFilter from './filters/LogTextFilter';
 
 class Filters extends React.Component {
   render () {
@@ -14,6 +15,7 @@ class Filters extends React.Component {
         <FilesFilter />
         <LogTypeFilter />
         <TimeFilter />
+        <LogTextFilter />
       </List>
     );
   }

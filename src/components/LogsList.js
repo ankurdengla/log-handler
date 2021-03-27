@@ -159,9 +159,13 @@ class LogsList extends React.Component {
       timeFilter = timeFrom && timeTo,
 
       // Log Type filter
-      logTypeFilter = LogsStore.enabledLogType[log.type];
+      logTypeFilter = LogsStore.enabledLogType[log.type],
 
-    return fileFilter && timeFilter && logTypeFilter;
+      // Log Text filter
+      matches = [...log.message.matchAll(new RegExp(LogsStore.logsFilterText, 'gi'))].map(a => a.index),
+      LogTextFilter = matches.length > 0;
+
+    return fileFilter && timeFilter && logTypeFilter && LogTextFilter;
   }
 
 	render () {

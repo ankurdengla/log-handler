@@ -30,6 +30,7 @@ class LogsStore {
   @observable mergedLogs;
   @observable timestampRange;
   @observable enabledLogType;
+  @observable logsFilterText;
 
   constructor() {
     makeObservable(this);
@@ -49,7 +50,8 @@ class LogsStore {
       info: true,
       error: true,
       warn: true
-    }
+    };
+    this.logsFilterText = '';
   }
 
   @action
@@ -91,6 +93,11 @@ class LogsStore {
     }
 
     this.enabledLogType[type] = !this.enabledLogType[type];
+  }
+
+  @action
+  updateLogFilterText (filterText) {
+    this.logsFilterText = filterText;
   }
 
   parseFileData(filename, fileData) {
