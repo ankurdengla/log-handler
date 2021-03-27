@@ -21,7 +21,11 @@ class LogTextFilter extends React.Component {
     this.filterText = '';
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleTextChange = _.debounce(this.handleTextChange.bind(this), 300);
-    this.handleSearch = _.debounce(this.handleSearch.bind(this), 500);
+    this.handleSearch = _.debounce(this.handleSearch.bind(this), 500); 
+  }
+
+  componentDidMount () {
+    this.attachListeners();
   }
 
   toggleOpen () {
@@ -44,6 +48,16 @@ class LogTextFilter extends React.Component {
     LogsStore.updateLogFilterText(this.filterText);
   }
 
+  attachListeners () {
+    this.searchFieldRef.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+
+        this.handleSearch();
+      }
+    });
+  }
+
   render () {
     let open = this.state.open;
 
@@ -56,12 +70,13 @@ class LogTextFilter extends React.Component {
           <ListItemText primary="Log Text" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={open} timeout="auto">
           <List dense component="div" style={{paddingLeft: 16}}>
             <ListItem dense>
               <TextField 
                 onChange={this.handleTextChange}
                 placeholder='Enter text to search'
+                ref={(textRef) => { this.searchFieldRef = textRef; }}
               />
               <ListItemSecondaryAction>
                 <IconButton

@@ -46,7 +46,7 @@ class TimeFilter extends React.Component {
           <ListItemText primary="Time" />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={open} timeout="auto">
           <List component="div" style={{paddingLeft: 16}}>
             <ListItem dense>
               <TextField
