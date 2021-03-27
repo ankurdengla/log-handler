@@ -80,7 +80,10 @@ class FilesFilter extends React.Component {
           <ListItemIcon>
             <DescriptionIcon />
           </ListItemIcon>
-          <ListItemText primary="Files" />
+          <ListItemText 
+            primary="Files" 
+            secondary={`${files.length} files uploaded`}
+          />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>

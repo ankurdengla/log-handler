@@ -7,13 +7,10 @@ import LogTypeFilter from './filters/LogTypeFilter';
 class Filters extends React.Component {
   render () {
     return (
-      <List
-        subheader={
-          <ListSubheader component="div" style={{fontSize: 16}}>
-            Filters
-          </ListSubheader>
-        }
-      >
+      <List className='filters-list'>
+        <ListSubheader disableSticky component="div" style={{fontSize: 16}}>
+          Filters
+        </ListSubheader>
         <FilesFilter />
         <LogTypeFilter />
         <TimeFilter />
