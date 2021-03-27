@@ -4,10 +4,11 @@ import { Button } from '@material-ui/core';
 import _ from 'lodash';
 
 import FileInput from './FileInput';
-import FilesList from './FilesList';
+import Filters from './Filters';
 import LogsStore from '../stores/LogsStore';
 
-export default class Sidebar extends React.Component {
+@observer
+class Sidebar extends React.Component {
   reset(){
     LogsStore.resetStore();
   }
@@ -15,9 +16,15 @@ export default class Sidebar extends React.Component {
   render () {
     return (
       <div className="sidebar">
-        <FileInput/>
-        <FilesList />
-        <ResetButton />
+        {
+          !_.isEmpty(LogsStore.filesData) ? 
+            <React.Fragment >
+              <ResetButton /> 
+              <Filters />
+            </React.Fragment>
+            :
+            <FileInput/>
+        }
       </div>
     );
   }
@@ -44,3 +51,5 @@ const ResetButton = observer(function () {
 const resetStore = function () {
   LogsStore.resetStore();
 }
+
+export default Sidebar;

@@ -26,8 +26,9 @@ class Log {
 }
 
 class LogsStore {
-  @observable filesData = {};
-  @observable mergedLogs = [];
+  @observable filesData;
+  @observable mergedLogs;
+  @observable timestampRange;
 
   constructor() {
     makeObservable(this);
@@ -39,6 +40,10 @@ class LogsStore {
   resetStore () {
     this.filesData = {};
     this.mergedLogs = [];
+    this.timestampRange = {
+      from: -1,
+      to: -1
+    };
   }
 
   @action
@@ -71,6 +76,15 @@ class LogsStore {
     }
 
     this.filesData[filename].isEnabled = true;
+  }
+
+  @action
+  updateTimestamp (criteria, timestamp) {
+    if (!['from', 'to'].includes(criteria) || !timestamp) {
+      return;
+    }
+
+    this.timestampRange[criteria] = timestamp;
   }
 
   parseFileData(filename, fileData) {

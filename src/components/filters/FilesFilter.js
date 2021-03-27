@@ -8,14 +8,30 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import LogsStore from '../stores/LogsStore';
+import LogsStore from '../../stores/LogsStore';
+import { Collapse } from '@material-ui/core';
+import { Description as DescriptionIcon, ExpandLess, ExpandMore } from '@material-ui/icons';
 
 @observer
-class FilesList extends React.Component { 
+class FilesFilter extends React.Component {
   constructor () {
     super();
 
+    this.state = {
+      open: true
+    }
+
+    this.toggleOpen = this.toggleOpen.bind(this);
+    this.getFilesList = this.getFilesList.bind(this);
     this.handleListItemToggle = _.debounce(this.handleListItemToggle.bind(this), 500, { leading: true, trailing: false });
+  }
+
+  toggleOpen() {
+    this.setState((prevState) => {
+      return {
+        open: !prevState.open
+      }
+    })
   }
 
   handleListItemToggle(value) {
@@ -28,14 +44,11 @@ class FilesList extends React.Component {
     fileData.isEnabled ? LogsStore.disableFile(value) : LogsStore.enableFile(value);
   }
 
-  render () {
-    let filesData = LogsStore.filesData,
-      files = Object.keys(filesData);
-   
+  getFilesList (filesData, files) {
     return (
-      <List>
+      <React.Fragment>
         {files.map((value) => {
-          const labelId = `checkbox-list-label-${value}`;
+          let labelId = `checkbox-list-label-${value}`;
 
           return (
             <ListItem key={value} dense button onClick={this.handleListItemToggle.bind(this, value)}>
@@ -52,9 +65,32 @@ class FilesList extends React.Component {
             </ListItem>
           );
         })}
-      </List>
+      </React.Fragment>
+    );
+  }
+
+  render () {
+    let open = this.state.open,
+      filesData = LogsStore.filesData,
+      files = Object.keys(filesData);
+
+    return  (
+      <React.Fragment>
+        <ListItem button onClick={this.toggleOpen}>
+          <ListItemIcon>
+            <DescriptionIcon />
+          </ListItemIcon>
+          <ListItemText primary="Files" />
+          {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" style={{paddingLeft: 16}}>
+            {this.getFilesList(filesData, files)}
+          </List>
+        </Collapse>
+      </React.Fragment>
     );
   }
 }
 
-export default FilesList;
+export default FilesFilter;

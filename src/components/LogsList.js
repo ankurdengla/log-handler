@@ -63,8 +63,8 @@ class LogsListItem extends React.Component {
       Icon = this.getIcon(logItem.type),
 
       dateObj = new Date(logItem.timestamp),
-      timestamp = dateObj.toString().split(' GMT')[0],
-      timeWithMilliseconds = `${timestamp}.${dateObj.getMilliseconds().toString().padStart(3, '0')}`;
+      dateTime = dateObj.toString().split(' GMT')[0],
+      timeWithMilliseconds = `${dateTime}.${dateObj.getMilliseconds().toString().padStart(3, '0')}`;
 
     return (
       <div className="logs-list-item"
@@ -145,9 +145,25 @@ class LogsList extends React.Component {
     return this.heightSet[index] || MIN_ROW_HEIGHT;
   }
 
+  shouldShowLog (log) {
+    if (!log) {
+      return;
+    }
+
+    // File Filter
+    let fileFilter = LogsStore.filesData[log.filename].isEnabled,
+
+      // Time Filter
+      timeFrom = LogsStore.timestampRange.from === -1 || LogsStore.timestampRange.from < log.timestamp,
+      timeTo = LogsStore.timestampRange.to === -1 || LogsStore.timestampRange.to > log.timestamp,
+      timeFilter = timeFrom && timeTo;
+
+    return fileFilter && timeFilter;
+  }
+
 	render () {
     this.logs = LogsStore.mergedLogs.filter((log) => {
-      return LogsStore.filesData[log.filename].isEnabled;
+      return this.shouldShowLog(log);
     });
 
     return (
