@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+
 import { VariableSizeList as VirtualizedList } from 'react-window';
 import { AutoSizer } from 'react-virtualized';
 import LogsStore from '../stores/LogsStore';
@@ -9,6 +10,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import Chip from '@material-ui/core/Chip';
+import HighlightedText from './utils/HighlightedText';
 
 const  MIN_ROW_HEIGHT = 42;
 class LogsListItem extends React.Component {
@@ -51,7 +53,7 @@ class LogsListItem extends React.Component {
         return InfoIcon;
     }
   }
-  
+
   render () {
     let logItem = this.props.logItem;
 
@@ -84,7 +86,10 @@ class LogsListItem extends React.Component {
           {timeWithMilliseconds}
         </div>
         <div className="log-list-item-section" style={{color: logColor, 'flexShrink': 1 }}>
-          {logItem.message}
+          <HighlightedText 
+            text={logItem.message}
+            searchTerm={LogsStore.logsFilterText}
+          />
         </div>
       </div>
     )
@@ -162,8 +167,7 @@ class LogsList extends React.Component {
       logTypeFilter = LogsStore.enabledLogType[log.type],
 
       // Log Text filter
-      matches = [...log.message.matchAll(new RegExp(LogsStore.logsFilterText, 'gi'))].map(a => a.index),
-      LogTextFilter = matches.length > 0;
+      LogTextFilter = log.message.includes(LogsStore.logsFilterText);
 
     return fileFilter && timeFilter && logTypeFilter && LogTextFilter;
   }

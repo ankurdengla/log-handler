@@ -86,3 +86,7 @@
   align-items: center;
   font-size: 24px;
 }
+
+mark {
+  background-color: rgb(185, 185, 40);
+}
