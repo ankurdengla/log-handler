@@ -167,7 +167,7 @@ class LogsList extends React.Component {
       logTypeFilter = LogsStore.enabledLogType[log.type],
 
       // Log Text filter
-      LogTextFilter = log.message.includes(LogsStore.logsFilterText);
+      LogTextFilter = log.message.toLowerCase().includes(LogsStore.logsFilterText);
 
     return fileFilter && timeFilter && logTypeFilter && LogTextFilter;
   }

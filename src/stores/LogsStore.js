@@ -96,8 +96,8 @@ class LogsStore {
   }
 
   @action
-  updateLogFilterText (filterText) {
-    this.logsFilterText = filterText;
+  updateLogFilterText (filterText = '') {
+    this.logsFilterText = filterText.toLowerCase();
   }
 
   parseFileData(filename, fileData) {
