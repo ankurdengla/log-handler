@@ -39,7 +39,7 @@ class FilterListItem extends React.Component {
           </ListItemIcon>
           <ListItemText primary={label} />
           <ListItemSecondaryAction>
-          <Button disableElevation color='primary' size='primary' onClick={resetFunction}>
+          <Button disableElevation color='primary' size='small' onClick={resetFunction}>
             Reset
           </Button>
           </ListItemSecondaryAction>

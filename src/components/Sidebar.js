@@ -30,23 +30,22 @@ class Sidebar extends React.Component {
   }
 }
 
-const ResetButton = observer(function () {
+const ResetButton = function () {
   return (
-    !_.isEmpty(LogsStore.filesData) && 
-      <div
-        className='reset-button'
+    <div
+      className='reset-button'
+    >
+      <Button
+        onClick={resetStore}
+        color='primary'
+        variant='contained'
+        style={{ width: '100%' }}
       >
-        <Button
-          onClick={resetStore}
-          color='primary'
-          variant='outlined'
-          style={{ width: '100%' }}
-        >
-          Reset
-        </Button>
-      </div>
+        Clear Logs
+      </Button>
+    </div>
   );
-}) 
+}
 
 const resetStore = function () {
   LogsStore.resetStore();

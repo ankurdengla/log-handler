@@ -70,14 +70,22 @@ class LogsListItem extends React.Component {
 
     return (
       <div className="logs-list-item"
-        style={this.props.style}
+        style={{ 
+          ...this.props.style,
+          color: logColor
+        }}
         data-index={this.props.index}
       >
         <div className="log-list-item-section" style={{width: 60}}>
           {logItem.appId}
         </div>
         <div className="log-list-item-section">
-          <Chip label={logItem.process} variant='outlined' size='small' style={{ fontSize: 12, width: 84 }}/>
+          <Chip 
+            label={logItem.process} 
+            variant='contained' 
+            size='small' 
+            style={{ fontSize: 12, width: 84, color: logColor }}
+          />
         </div>
         <div className="log-list-item-section">
           <Icon style={{color: logColor }}/>

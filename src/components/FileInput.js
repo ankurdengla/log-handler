@@ -5,9 +5,6 @@ import Button from '@material-ui/core/Button';
 export default class FileInput extends React.Component {
 	componentDidMount () {
 		this.addListeners();
-
-	  let label = document.querySelector('.file-input-label');
-		this.labelSpan = label.querySelector('span');
 	}
 	
 	addListeners () {
@@ -42,15 +39,16 @@ export default class FileInput extends React.Component {
 					ref={(input) => { this.fileInput = input; }}
 					type='file' multiple 
 				/>
-			<Button
-				className='file-input-button'
-				color='primary'
-				variant='outlined'
-			>
 				<label className='file-input-label' htmlFor="file">
-					<span>Upload log files</span>
+					<Button
+						className='file-input-button'
+						color='primary'
+						variant='contained'
+						component='span'
+					>
+						Upload log files
+					</Button>
 				</label>
-			</Button>
 			</div>
 		);
 	}	
