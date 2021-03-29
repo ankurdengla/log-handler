@@ -82,7 +82,7 @@ class LogsListItem extends React.Component {
         <div className="log-list-item-section">
           <Chip 
             label={logItem.process} 
-            variant='contained' 
+            variant='outlined' 
             size='small' 
             style={{ fontSize: 12, width: 84, color: logColor }}
           />
