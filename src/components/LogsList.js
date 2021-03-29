@@ -31,10 +31,10 @@ class LogsListItem extends React.Component {
 
     switch(type) {
       case 'error': 
-        fontColor = palette.error.light;
+        fontColor = palette.error.dark;
         break;
       case 'warn':
-        fontColor = palette.warning.light;
+        fontColor = palette.warning.dark;
         break;
       default:
         fontColor = palette.text.primary;

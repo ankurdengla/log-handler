@@ -6,7 +6,6 @@
   display: flex;
   flex: 1;
   height: 100%;
-  /* background-color: #263238; */
   font-size: 12px;
 }
 
@@ -14,6 +13,7 @@
   display: flex;
   flex: 1;
   height: 100%;
+  background-color: #fafafa;
 }
 
 .sidebar {
@@ -25,6 +25,8 @@
   min-width:200px;
   padding: 12px;
   border-right: solid rgb(170, 168, 168) 1px;
+  background-color: #303030;
+  color: #fafafa;
 }
 
 .input-container {

@@ -41,6 +41,8 @@ class LogTypeFilter extends React.Component {
               checked={enabledLogType.info}
               tabIndex={-1}
               disableRipple
+              color='default'
+              size='small'
             />
           </ListItemIcon>
           <ListItemText primary='Info' />
@@ -52,6 +54,8 @@ class LogTypeFilter extends React.Component {
               checked={enabledLogType.warn}
               tabIndex={-1}
               disableRipple
+              color='default'
+              size='small'
             />
           </ListItemIcon>
           <ListItemText primary='Warn' />
@@ -63,6 +67,8 @@ class LogTypeFilter extends React.Component {
               checked={enabledLogType.error}
               tabIndex={-1}
               disableRipple
+              color='default'
+              size='small'
             />
           </ListItemIcon>
           <ListItemText primary='Error' />

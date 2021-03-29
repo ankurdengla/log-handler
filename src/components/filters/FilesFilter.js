@@ -42,6 +42,8 @@ class FilesFilter extends React.Component {
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ 'aria-labelledby': labelId }}
+                  color='default'
+                  size='small'
                 />
               </ListItemIcon>
               <ListItemText id={labelId} primary={value} />

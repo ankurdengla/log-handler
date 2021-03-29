@@ -39,12 +39,12 @@ class FilterListItem extends React.Component {
           </ListItemIcon>
           <ListItemText primary={label} />
           <ListItemSecondaryAction>
-          <Button disableElevation color="secondary" size="small" onClick={resetFunction}>
+          <Button disableElevation color='primary' size='primary' onClick={resetFunction}>
             Reset
           </Button>
           </ListItemSecondaryAction>
         </ListItem>
-        <Collapse in={isOpen} timeout="auto" style={{paddingLeft: 16}}> 
+        <Collapse in={isOpen} timeout='auto' style={{paddingLeft: 16}}> 
           <FilterContent />
         </Collapse>
       </React.Fragment>

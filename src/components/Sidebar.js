@@ -38,7 +38,7 @@ const ResetButton = observer(function () {
       >
         <Button
           onClick={resetStore}
-          color='secondary'
+          color='primary'
           variant='outlined'
           style={{ width: '100%' }}
         >

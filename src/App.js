@@ -5,22 +5,25 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-const theme = createMuiTheme({
+const sidebarTheme = createMuiTheme({
   palette: {
-    type: 'dark'
+    type: 'dark',
+    primary: {
+      main: '#00ddd6'
+    }
   },
 });
 
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <div className="log-handler">
       <CssBaseline />
-      <div className="log-handler">
+      <ThemeProvider theme={sidebarTheme}>
         <Sidebar />
-        <MainContent />
-      </div>
-    </ThemeProvider>
-    
+      </ThemeProvider>
+      <MainContent />
+    </div>
   );
 }
 

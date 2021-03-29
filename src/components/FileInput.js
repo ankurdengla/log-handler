@@ -44,7 +44,7 @@ export default class FileInput extends React.Component {
 				/>
 			<Button
 				className='file-input-button'
-				color='secondary'
+				color='primary'
 				variant='outlined'
 			>
 				<label className='file-input-label' htmlFor="file">
