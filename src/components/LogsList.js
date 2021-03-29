@@ -158,32 +158,9 @@ class LogsList extends React.Component {
     return this.heightSet[index] || MIN_ROW_HEIGHT;
   }
 
-  shouldShowLog (log) {
-    if (!log) {
-      return;
-    }
-
-    // File Filter
-    let fileFilter = LogsStore.filesData[log.filename].isEnabled,
-
-      // Time Filter
-      timeFrom = LogsStore.timestampRange.from === -1 || LogsStore.timestampRange.from < log.timestamp,
-      timeTo = LogsStore.timestampRange.to === -1 || LogsStore.timestampRange.to > log.timestamp,
-      timeFilter = timeFrom && timeTo,
-
-      // Log Type filter
-      logTypeFilter = LogsStore.enabledLogType[log.type],
-
-      // Log Text filter
-      LogTextFilter = log.message.toLowerCase().includes(LogsStore.logsFilterText);
-
-    return fileFilter && timeFilter && logTypeFilter && LogTextFilter;
-  }
-
 	render () {
-    this.logs = LogsStore.mergedLogs.filter((log) => {
-      return this.shouldShowLog(log);
-    });
+    this.logs = LogsStore.filteredLogs;
+
 
     return (
       <div className='logs-list'>

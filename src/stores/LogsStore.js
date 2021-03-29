@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, toJS } from 'mobx';
+import { action, computed, makeObservable, observable, toJS } from 'mobx';
 import _ from 'lodash';
 import { v4 } from 'uuid';
 
@@ -131,6 +131,13 @@ class LogsStore {
     return mergedLogs;
   }
 
+  @computed
+  get filteredLogs () {
+    return this.mergedLogs.filter((log) => {
+      return this.shouldShowLog(log);
+    })
+  }
+
   mergeArrays (arr1, arr2) {
     if (!arr1) {
       return arr2;
@@ -156,6 +163,28 @@ class LogsStore {
     }
 
     return output;
+  }
+
+  shouldShowLog (log) {
+    if (!log) {
+      return;
+    }
+
+    // File Filter
+    let fileFilter = this.filesData[log.filename].isEnabled,
+
+      // Time Filter
+      timeFrom = this.timestampRange.from === -1 || this.timestampRange.from < log.timestamp,
+      timeTo = this.timestampRange.to === -1 || this.timestampRange.to > log.timestamp,
+      timeFilter = timeFrom && timeTo,
+
+      // Log Type filter
+      logTypeFilter = this.enabledLogType[log.type],
+
+      // Log Text filter
+      LogTextFilter = log.message.toLowerCase().includes(this.logsFilterText);
+
+    return fileFilter && timeFilter && logTypeFilter && LogTextFilter;
   }
 }
 
