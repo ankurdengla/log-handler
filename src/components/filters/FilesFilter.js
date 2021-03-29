@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import { transaction, action } from 'mobx';
 import _ from 'lodash';
 
-import { List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@material-ui/core';
+import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import LogsStore from '../../stores/LogsStore';
 import { Description as DescriptionIcon } from '@material-ui/icons';
@@ -13,21 +13,8 @@ class FilesFilter extends React.Component {
   constructor () {
     super();
 
-    this.state = {
-      open: true
-    }
-
-    this.toggleOpen = this.toggleOpen.bind(this);
     this.getFilesList = this.getFilesList.bind(this);
     this.handleListItemToggle = _.debounce(this.handleListItemToggle.bind(this), 500, { leading: true, trailing: false });
-  }
-
-  toggleOpen() {
-    this.setState((prevState) => {
-      return {
-        open: !prevState.open
-      }
-    })
   }
 
   handleListItemToggle(value) {
@@ -66,8 +53,7 @@ class FilesFilter extends React.Component {
   }
 
   render () {
-    let open = this.state.open,
-      filesData = LogsStore.filesData,
+    let filesData = LogsStore.filesData,
       files = Object.keys(filesData);
 
     return  (

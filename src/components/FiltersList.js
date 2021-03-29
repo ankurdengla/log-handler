@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Collapse, ListItemSecondaryAction, Button } from '@material-ui/core';
-import { ExpandLess, ExpandMore, KeyboardArrowRight, KeyboardArrowDown } from '@material-ui/icons';
+import { KeyboardArrowRight, KeyboardArrowDown } from '@material-ui/icons';
 import filters from './filters';
 
 class FilterListItem extends React.Component {

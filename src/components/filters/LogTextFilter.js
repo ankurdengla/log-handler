@@ -1,40 +1,24 @@
 import React from 'react';
 import _ from 'lodash';
-import { action } from 'mobx';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
 import LogsStore from '../../stores/LogsStore';
-import { Collapse, IconButton, ListItemSecondaryAction, TextField } from '@material-ui/core';
-import { Subject as SubjectIcon, Search as SearchIcon, ExpandLess, ExpandMore } from '@material-ui/icons';
+import { IconButton, ListItemSecondaryAction, TextField } from '@material-ui/core';
+import { Subject as SubjectIcon, Search as SearchIcon } from '@material-ui/icons';
 
 class LogTextFilter extends React.Component {
   constructor () {
     super();
 
-    this.state = {
-      open: false
-    }
-
     this.filterText = '';
-    this.toggleOpen = this.toggleOpen.bind(this);
     this.handleTextChange = _.debounce(this.handleTextChange.bind(this), 300);
     this.handleSearch = _.debounce(this.handleSearch.bind(this), 500); 
   }
 
   componentDidMount () {
     this.attachListeners();
-  }
-
-  toggleOpen () {
-    this.setState((prevState) => {
-      return {
-        open: !prevState.open
-      }
-    })
   }
 
   handleTextChange (event) {
@@ -60,8 +44,6 @@ class LogTextFilter extends React.Component {
   }
 
   render () {
-    let open = this.state.open;
-
     return  (
       <List dense component="div">
         <ListItem dense>

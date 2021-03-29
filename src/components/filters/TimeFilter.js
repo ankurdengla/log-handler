@@ -3,40 +3,18 @@ import { observer } from 'mobx-react';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
 import LogsStore from '../../stores/LogsStore';
-import { Collapse, TextField } from '@material-ui/core';
-import { Alarm as AlarmIcon, ExpandLess, ExpandMore } from '@material-ui/icons';
+import { TextField } from '@material-ui/core';
+import { Alarm as AlarmIcon } from '@material-ui/icons';
 
 @observer
 class TimeFilter extends React.Component {
-  constructor () {
-    super();
-
-    this.state = {
-      open: false
-    }
-
-    this.toggleOpen = this.toggleOpen.bind(this);
-  }
-
-  toggleOpen () {
-    this.setState((prevState) => {
-      return {
-        open: !prevState.open
-      }
-    })
-  }
-
   handleDateChange (criteria, event) {
     LogsStore.updateTimestamp(criteria, (new Date(event.target.value).getTime()));
   }
 
   render () {
-    let open = this.state.open;
-
     return  (
       <List component="div">
         <ListItem dense>

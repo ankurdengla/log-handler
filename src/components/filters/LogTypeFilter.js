@@ -8,8 +8,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import LogsStore from '../../stores/LogsStore';
-import { Checkbox, Collapse } from '@material-ui/core';
-import { Info as InfoIcon, ExpandLess, ExpandMore } from '@material-ui/icons';
+import { Checkbox } from '@material-ui/core';
+import { Info as InfoIcon } from '@material-ui/icons';
 
 @observer
 class LogTypeFilter extends React.Component {
@@ -19,16 +19,6 @@ class LogTypeFilter extends React.Component {
     this.state = {
       open: false
     }
-
-    this.toggleOpen = this.toggleOpen.bind(this);
-  }
-
-  toggleOpen () {
-    this.setState((prevState) => {
-      return {
-        open: !prevState.open
-      }
-    })
   }
 
   handleListItemToggle(value) {
@@ -40,8 +30,7 @@ class LogTypeFilter extends React.Component {
   }
 
   render () {
-    let open = this.state.open,
-      enabledLogType = LogsStore.enabledLogType;
+    let enabledLogType = LogsStore.enabledLogType;
 
     return (
       <List component="div">
