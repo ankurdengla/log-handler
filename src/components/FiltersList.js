@@ -1,4 +1,6 @@
 import React from 'react';
+import { observer } from 'mobx-react';
+
 import { List, 
   ListItem, 
   ListItemIcon, 
@@ -11,6 +13,7 @@ import { List,
 } from '@material-ui/core';
 import { KeyboardArrowRight, KeyboardArrowDown } from '@material-ui/icons';
 import filters from './filters';
+import LogsStore from '../stores/LogsStore';
 
 class FilterListItem extends React.Component {
   constructor (props) {
@@ -61,6 +64,7 @@ class FilterListItem extends React.Component {
   }
 }
 
+@observer
 class FiltersList extends React.Component {
   getFiltersList () {
     return Object.values(filters).map((filter) => {
@@ -77,8 +81,9 @@ class FiltersList extends React.Component {
   render () {    
     return (
       <List className='filters-list' style={{paddingTop: 16}}>
-        <ListSubheader disableSticky component="div" style={{fontSize: 16}}>
+        <ListSubheader disableSticky component="div" style={{fontSize: 16, display: 'flex'}}>
           Filters
+          <span  style={{fontSize: 12,  marginLeft: 'auto' }}>{LogsStore.filteredLogs.length} logs</span>
         </ListSubheader>
         <Divider />
         {this.getFiltersList()}
