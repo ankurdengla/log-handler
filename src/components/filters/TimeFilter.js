@@ -38,57 +38,52 @@ class TimeFilter extends React.Component {
     let open = this.state.open;
 
     return  (
-      <React.Fragment>
-        <ListItem button onClick={this.toggleOpen}>
-          <ListItemIcon>
-            <AlarmIcon />
-          </ListItemIcon>
-          <ListItemText primary="Time" />
-          {open ? <ExpandLess /> : <ExpandMore />}
+      <List component="div" style={{paddingLeft: 16}}>
+        <ListItem dense>
+          <TextField
+            label="From"
+            type="datetime-local"
+            defaultValue="2017-05-24T10:30:00"
+            style={{
+              paddingTop: 4,
+              paddingBottom: 4
+            }}
+            inputProps={{
+              step: 1,
+              style: {
+                fontSize: 12
+              }
+            }}
+            onBlur={this.handleDateChange.bind(this, 'from')}
+          />
         </ListItem>
-        <Collapse in={open} timeout="auto">
-          <List component="div" style={{paddingLeft: 16}}>
-            <ListItem dense>
-              <TextField
-                label="From"
-                type="datetime-local"
-                defaultValue="2017-05-24T10:30:00"
-                style={{
-                  paddingTop: 4,
-                  paddingBottom: 4
-                }}
-                inputProps={{
-                  step: 1,
-                  style: {
-                    fontSize: 12
-                  }
-                }}
-                onBlur={this.handleDateChange.bind(this, 'from')}
-              />
-            </ListItem>
-            <ListItem>
-              <TextField
-                label="To"
-                type="datetime-local"
-                defaultValue="2017-05-24T10:30:00"
-                style={{
-                  paddingTop: 4,
-                  paddingBottom: 4
-                }}
-                inputProps={{
-                  step: 1,
-                  style: {
-                    fontSize: 12
-                  }
-                }}
-                onBlur={this.handleDateChange.bind(this, 'to')}
-              />
-            </ListItem>
-          </List>
-        </Collapse>
-      </React.Fragment>
+        <ListItem>
+          <TextField
+            label="To"
+            type="datetime-local"
+            defaultValue="2017-05-24T10:30:00"
+            style={{
+              paddingTop: 4,
+              paddingBottom: 4
+            }}
+            inputProps={{
+              step: 1,
+              style: {
+                fontSize: 12
+              }
+            }}
+            onBlur={this.handleDateChange.bind(this, 'to')}
+          />
+        </ListItem>
+      </List>
     );
   }
 }
 
-export default TimeFilter;
+const componentDetails = {
+  label: 'Time',
+  icon: AlarmIcon,
+  content: TimeFilter
+};
+
+export default componentDetails;

@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import _ from 'lodash';
 
 import FileInput from './FileInput';
-import Filters from './Filters';
+import Filters from './FiltersList';
 import LogsStore from '../stores/LogsStore';
 
 @observer

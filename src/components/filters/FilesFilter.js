@@ -75,25 +75,18 @@ class FilesFilter extends React.Component {
       files = Object.keys(filesData);
 
     return  (
-      <React.Fragment>
-        <ListItem button onClick={this.toggleOpen}>
-          <ListItemIcon>
-            <DescriptionIcon />
-          </ListItemIcon>
-          <ListItemText 
-            primary="Files" 
-            secondary={`${files.length} files uploaded`}
-          />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={open} timeout="auto">
-          <List component="div" style={{paddingLeft: 16}}>
-            {this.getFilesList(filesData, files)}
-          </List>
-        </Collapse>
-      </React.Fragment>
+      <List component="div" style={{paddingLeft: 16}}>
+        {this.getFilesList(filesData, files)}
+      </List>
     );
   }
 }
 
-export default FilesFilter;
+const componentDetails = {
+  label: 'Files',
+  icon: DescriptionIcon,
+  content: FilesFilter,
+  isExpanded: true
+};
+
+export default componentDetails;

@@ -62,37 +62,32 @@ class LogTextFilter extends React.Component {
     let open = this.state.open;
 
     return  (
-      <React.Fragment>
-        <ListItem button onClick={this.toggleOpen}>
-          <ListItemIcon>
-            <SubjectIcon />
-          </ListItemIcon>
-          <ListItemText primary="Log Text" />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={open} timeout="auto">
-          <List dense component="div" style={{paddingLeft: 16}}>
-            <ListItem dense>
-              <TextField 
-                onChange={this.handleTextChange}
-                placeholder='Enter text to search'
-                ref={(textRef) => { this.searchFieldRef = textRef; }}
+      <List dense component="div" style={{paddingLeft: 16}}>
+        <ListItem dense>
+          <TextField 
+            onChange={this.handleTextChange}
+            placeholder='Enter text to search'
+            ref={(textRef) => { this.searchFieldRef = textRef; }}
+          />
+          <ListItemSecondaryAction>
+            <IconButton
+              onClick={this.handleSearch}
+            >
+              <SearchIcon 
+                fontSize='small'
               />
-              <ListItemSecondaryAction>
-                <IconButton
-                  onClick={this.handleSearch}
-                >
-                  <SearchIcon 
-                    fontSize='small'
-                  />
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </Collapse>
-      </React.Fragment>
+            </IconButton>
+          </ListItemSecondaryAction>
+        </ListItem>
+      </List>
     );
   }
 }
 
-export default LogTextFilter;
+const componentDetails = {
+  label: 'Log Text',
+  icon: SubjectIcon,
+  content: LogTextFilter
+};
+
+export default componentDetails;

@@ -42,55 +42,50 @@ class LogTypeFilter extends React.Component {
     let open = this.state.open,
       enabledLogType = LogsStore.enabledLogType;
 
-    return  (
-      <React.Fragment>
-        <ListItem button onClick={this.toggleOpen}>
+    return (
+      <List component="div" style={{paddingLeft: 16}}>
+        <ListItem key='info' dense button onClick={this.handleListItemToggle.bind(this, 'info')}>
           <ListItemIcon>
-            <InfoIcon />
+            <Checkbox
+              edge="start"
+              checked={enabledLogType.info}
+              tabIndex={-1}
+              disableRipple
+            />
           </ListItemIcon>
-          <ListItemText primary="Log Type" />
-          {open ? <ExpandLess /> : <ExpandMore />}
+          <ListItemText primary='Info' />
         </ListItem>
-        <Collapse in={open} timeout="auto">
-          <List component="div" style={{paddingLeft: 16}}>
-            <ListItem key='info' dense button onClick={this.handleListItemToggle.bind(this, 'info')}>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={enabledLogType.info}
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary='Info' />
-            </ListItem>
-            <ListItem key='warn' dense button onClick={this.handleListItemToggle.bind(this, 'warn')}>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={enabledLogType.warn}
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary='Warn' />
-            </ListItem>
-            <ListItem key='error' dense button onClick={this.handleListItemToggle.bind(this, 'error')}>
-              <ListItemIcon>
-                <Checkbox
-                  edge="start"
-                  checked={enabledLogType.error}
-                  tabIndex={-1}
-                  disableRipple
-                />
-              </ListItemIcon>
-              <ListItemText primary='Error' />
-            </ListItem>
-          </List>
-        </Collapse>
-      </React.Fragment>
+        <ListItem key='warn' dense button onClick={this.handleListItemToggle.bind(this, 'warn')}>
+          <ListItemIcon>
+            <Checkbox
+              edge="start"
+              checked={enabledLogType.warn}
+              tabIndex={-1}
+              disableRipple
+            />
+          </ListItemIcon>
+          <ListItemText primary='Warn' />
+        </ListItem>
+        <ListItem key='error' dense button onClick={this.handleListItemToggle.bind(this, 'error')}>
+          <ListItemIcon>
+            <Checkbox
+              edge="start"
+              checked={enabledLogType.error}
+              tabIndex={-1}
+              disableRipple
+            />
+          </ListItemIcon>
+          <ListItemText primary='Error' />
+        </ListItem>
+      </List>
     );
   }
 }
 
-export default LogTypeFilter;
+const componentDetails = {
+  label: 'Log Type',
+  icon: InfoIcon,
+  content: LogTypeFilter
+};
+
+export default componentDetails;
