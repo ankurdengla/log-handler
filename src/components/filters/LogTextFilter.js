@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import { action } from 'mobx';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -84,10 +85,15 @@ class LogTextFilter extends React.Component {
   }
 }
 
+function resetLogTextFilter () {
+  LogsStore.updateLogFilterText('');
+}
+
 const componentDetails = {
   label: 'Log Text',
   icon: SubjectIcon,
-  content: LogTextFilter
+  content: LogTextFilter,
+  resetFunction: resetLogTextFilter
 };
 
 export default componentDetails;

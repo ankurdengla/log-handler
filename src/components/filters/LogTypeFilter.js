@@ -1,5 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import { transaction, action } from 'mobx';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -82,10 +83,19 @@ class LogTypeFilter extends React.Component {
   }
 }
 
+function resetLogTypeFilter () {
+  transaction(action(() => {
+    for (let logType in LogsStore.enabledLogType) {
+      LogsStore.enabledLogType[logType] = true;
+    };
+  }))
+}
+
 const componentDetails = {
   label: 'Log Type',
   icon: InfoIcon,
-  content: LogTypeFilter
+  content: LogTypeFilter,
+  resetFunction: resetLogTypeFilter
 };
 
 export default componentDetails;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Collapse } from '@material-ui/core';
-import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Collapse, ListItemSecondaryAction, Button } from '@material-ui/core';
+import { ExpandLess, ExpandMore, KeyboardArrowRight, KeyboardArrowDown } from '@material-ui/icons';
 import filters from './filters';
 
 class FilterListItem extends React.Component {
@@ -27,16 +27,22 @@ class FilterListItem extends React.Component {
     let FilterIcon = this.props.icon,
       FilterContent = this.props.content,
       label = this.props.label,
+      resetFunction = this.props.resetFunction,
       isOpen = this.state.isOpen;
 
     return (
       <React.Fragment>
         <ListItem button onClick={this.toggleOpen}>
           <ListItemIcon>
-            <FilterIcon />
+            {isOpen ? <KeyboardArrowDown /> : <KeyboardArrowRight />}
+            <FilterIcon fontSize='small'/>
           </ListItemIcon>
           <ListItemText primary={label} />
-          {isOpen ? <ExpandLess /> : <ExpandMore />}
+          <ListItemSecondaryAction>
+          <Button disableElevation color="secondary" size="small" onClick={resetFunction}>
+            Reset
+          </Button>
+          </ListItemSecondaryAction>
         </ListItem>
         <Collapse in={isOpen} timeout="auto"> 
           <FilterContent />
@@ -53,6 +59,7 @@ class FiltersList extends React.Component {
         label={filter.label}
         icon={filter.icon}
         content={filter.content}  
+        resetFunction={filter.resetFunction}
         isOpen={filter.isExpanded}
       />
     })

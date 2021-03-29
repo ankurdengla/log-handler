@@ -80,10 +80,16 @@ class TimeFilter extends React.Component {
   }
 }
 
+function resetTimeFilter () {
+  LogsStore.updateTimestamp('to', -1);
+  LogsStore.updateTimestamp('from', -1);
+}
+
 const componentDetails = {
   label: 'Time',
   icon: AlarmIcon,
-  content: TimeFilter
+  content: TimeFilter,
+  resetFunction: resetTimeFilter
 };
 
 export default componentDetails;

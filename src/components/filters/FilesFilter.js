@@ -1,16 +1,12 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import { transaction, action } from 'mobx';
 import _ from 'lodash';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { List, ListItem, ListItemIcon, ListItemText, ListSubheader } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
-
 import LogsStore from '../../stores/LogsStore';
-import { Collapse } from '@material-ui/core';
-import { Description as DescriptionIcon, ExpandLess, ExpandMore } from '@material-ui/icons';
+import { Description as DescriptionIcon } from '@material-ui/icons';
 
 @observer
 class FilesFilter extends React.Component {
@@ -82,10 +78,19 @@ class FilesFilter extends React.Component {
   }
 }
 
+function resetFilesFilter () {
+  transaction(action(() => {
+    for (let filename in LogsStore.filesData) {
+      LogsStore.filesData[filename].isEnabled = true;
+    };
+  }))
+}
+
 const componentDetails = {
   label: 'Files',
   icon: DescriptionIcon,
   content: FilesFilter,
+  resetFunction: resetFilesFilter,
   isExpanded: true
 };
 
