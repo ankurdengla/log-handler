@@ -1,5 +1,14 @@
 import React from 'react';
-import { List, ListItem, ListItemIcon, ListItemText, ListSubheader, Collapse, ListItemSecondaryAction, Button } from '@material-ui/core';
+import { List, 
+  ListItem, 
+  ListItemIcon, 
+  ListItemText, 
+  ListSubheader, 
+  ListItemSecondaryAction,
+  Divider,
+  Collapse,
+  Button 
+} from '@material-ui/core';
 import { KeyboardArrowRight, KeyboardArrowDown } from '@material-ui/icons';
 import filters from './filters';
 
@@ -32,10 +41,10 @@ class FilterListItem extends React.Component {
 
     return (
       <React.Fragment>
-        <ListItem button onClick={this.toggleOpen}>
+        <ListItem button onClick={this.toggleOpen} style={{paddingLeft: 0}}>
           <ListItemIcon>
             {isOpen ? <KeyboardArrowDown /> : <KeyboardArrowRight />}
-            <FilterIcon fontSize='small'/>
+            <FilterIcon fontSize='small' style={{marginRight: 8, marginLeft: 12}} />
           </ListItemIcon>
           <ListItemText primary={label} />
           <ListItemSecondaryAction>
@@ -67,10 +76,11 @@ class FiltersList extends React.Component {
   
   render () {    
     return (
-      <List className='filters-list'>
+      <List className='filters-list' style={{paddingTop: 16}}>
         <ListSubheader disableSticky component="div" style={{fontSize: 16}}>
           Filters
         </ListSubheader>
+        <Divider />
         {this.getFiltersList()}
       </List>
     );
