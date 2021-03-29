@@ -44,7 +44,7 @@ class LogTypeFilter extends React.Component {
       enabledLogType = LogsStore.enabledLogType;
 
     return (
-      <List component="div" style={{paddingLeft: 16}}>
+      <List component="div">
         <ListItem key='info' dense button onClick={this.handleListItemToggle.bind(this, 'info')}>
           <ListItemIcon>
             <Checkbox

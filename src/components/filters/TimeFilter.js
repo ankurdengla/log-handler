@@ -38,7 +38,7 @@ class TimeFilter extends React.Component {
     let open = this.state.open;
 
     return  (
-      <List component="div" style={{paddingLeft: 16}}>
+      <List component="div">
         <ListItem dense>
           <TextField
             label="From"

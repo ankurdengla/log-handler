@@ -71,7 +71,7 @@ class FilesFilter extends React.Component {
       files = Object.keys(filesData);
 
     return  (
-      <List component="div" style={{paddingLeft: 16}}>
+      <List component="div">
         {this.getFilesList(filesData, files)}
       </List>
     );

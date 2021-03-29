@@ -63,7 +63,7 @@ class LogTextFilter extends React.Component {
     let open = this.state.open;
 
     return  (
-      <List dense component="div" style={{paddingLeft: 16}}>
+      <List dense component="div">
         <ListItem dense>
           <TextField 
             onChange={this.handleTextChange}

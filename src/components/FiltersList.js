@@ -44,7 +44,7 @@ class FilterListItem extends React.Component {
           </Button>
           </ListItemSecondaryAction>
         </ListItem>
-        <Collapse in={isOpen} timeout="auto"> 
+        <Collapse in={isOpen} timeout="auto" style={{paddingLeft: 16}}> 
           <FilterContent />
         </Collapse>
       </React.Fragment>
