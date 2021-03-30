@@ -182,7 +182,7 @@ class LogsStore {
       logTypeFilter = this.enabledLogType[log.type],
 
       // Log Text filter
-      LogTextFilter = log.message.toLowerCase().includes(this.logsFilterText);
+      LogTextFilter = log.message && log.message.toLowerCase().includes(this.logsFilterText);
 
     return fileFilter && timeFilter && logTypeFilter && LogTextFilter;
   }
