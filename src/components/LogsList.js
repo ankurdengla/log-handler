@@ -16,13 +16,14 @@ const  MIN_ROW_HEIGHT = 42;
 class LogsListItem extends React.Component {
   componentDidMount () {
     this.selfNode = findDOMNode(this);
+    this.textNode = this.selfNode && this.selfNode.querySelector('.log-text');
 
     // Starts observing element
-    this.props.observeSizeChange && this.props.observeSizeChange(this.selfNode);
+    this.props.observeSizeChange && this.props.observeSizeChange(this.textNode);
   }
 
   componentWillUnmount () {
-    this.props.unobserveSizeChange && this.props.unobserveSizeChange(this.selfNode);
+    this.props.unobserveSizeChange && this.props.unobserveSizeChange(this.textNode);
   }
 
   getLogColor (type) {
@@ -93,7 +94,7 @@ class LogsListItem extends React.Component {
         <div className="log-list-item-section" style={{color: logColor}}>
           {timeWithMilliseconds}
         </div>
-        <div className="log-list-item-section" style={{color: logColor, 'flexShrink': 1 }}>
+        <div className="log-list-item-section log-text" data-index={this.props.index} style={{color: logColor, 'flexShrink': 1 }}>
           <HighlightedText 
             text={logItem.message}
             searchTerm={LogsStore.logsFilterText}
@@ -122,7 +123,7 @@ class LogsList extends React.Component {
 
         let index = entry.target.dataset.index;
 
-        this.heightSet[index] = entry.target.scrollHeight;
+        this.heightSet[index] = entry.target.offsetHeight;
 
         this.listRef.resetAfterIndex(index);
       }
@@ -176,7 +177,7 @@ class LogsList extends React.Component {
               itemCount={this.logs.length}
               itemSize={this.getItemSize.bind(this)}
               ref={(ref) => { this.listRef = ref}}
-              overscanCount={10}
+              overscanCount={20}
             >
               {this.getListItem.bind(this)}
             </VirtualizedList>
