@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { v4 } from 'uuid';
 
 // eslint-disable-next-line no-useless-escape
-const logPattern = /\[[^\[^\]]*\]/g;
+const logPattern = /(\[[A-Za-z0-9]*\])(\[[A-Za-z0-9]*\])(\[[A-Za-z0-9]*\])(\[[A-Za-z0-9]*\])(.*)/;
 
 class Log {
   constructor (filename, logString) {
@@ -17,11 +17,11 @@ class Log {
       return match.slice(1,-1);
     });
 
-    this.appId = matches[0];
-    this.timestamp = Number(matches[1]);
-    this.process = matches[2];
-    this.type = matches[3];
-    this.message = matches[4];
+    this.appId = matches[1];
+    this.timestamp = Number(matches[2]);
+    this.process = matches[3];
+    this.type = matches[4];
+    this.message = matches[5];
   }
 }
 
