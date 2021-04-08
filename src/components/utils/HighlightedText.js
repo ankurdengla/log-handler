@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 
 export default class HighlightedText extends React.Component {
   constructor (props) {
@@ -14,7 +15,9 @@ export default class HighlightedText extends React.Component {
       return [];
     }
 
-    return [...this.text.matchAll(new RegExp(this.searchTerm, 'gi'))].map(a => a.index);
+    let regExp = new RegExp( _.escapeRegExp(this.searchTerm), 'gi');
+
+    return [...this.text.matchAll(regExp)].map(a => a.index);
   }
 
   getHighlightedText () {
