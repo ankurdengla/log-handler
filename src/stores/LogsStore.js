@@ -31,6 +31,7 @@ class LogsStore {
   @observable timestampRange;
   @observable enabledLogType;
   @observable logsFilterText;
+  @observable activeAppSessionIds;
 
   constructor() {
     makeObservable(this);
@@ -52,6 +53,7 @@ class LogsStore {
       warn: true
     };
     this.logsFilterText = '';
+    this.activeAppSessionIds = [];
   }
 
   @action
@@ -98,6 +100,19 @@ class LogsStore {
   @action
   updateLogFilterText (filterText = '') {
     this.logsFilterText = filterText.toLowerCase();
+  }
+
+  @action
+  updateActiveAppSessionIds (sessionIdsText = '') {
+    let sessionIds = sessionIdsText.split(',')
+      .filter((id) => {
+        return id !== '';
+      })
+      .map((id) => {
+        return id.trim();
+      });
+
+    this.activeAppSessionIds = sessionIds;
   }
 
   parseFileData(filename, fileData) {
@@ -182,9 +197,12 @@ class LogsStore {
       logTypeFilter = this.enabledLogType[log.type],
 
       // Log Text filter
-      LogTextFilter = log.message && log.message.toLowerCase().includes(this.logsFilterText);
+      logTextFilter = log.message && log.message.toLowerCase().includes(this.logsFilterText),
 
-    return fileFilter && timeFilter && logTypeFilter && LogTextFilter;
+      // App Session ID filter
+      appSessionIdFilter = _.isEmpty(this.activeAppSessionIds) || this.activeAppSessionIds.includes(log.appId);
+
+    return fileFilter && timeFilter && logTypeFilter && logTextFilter && appSessionIdFilter;
   }
 }
 
