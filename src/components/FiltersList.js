@@ -36,8 +36,7 @@ class FilterListItem extends React.Component {
   }
 
   render () {
-    let FilterIcon = this.props.icon,
-      FilterContent = this.props.content,
+    let FilterContent = this.props.content,
       label = this.props.label,
       resetFunction = this.props.resetFunction,
       isOpen = this.state.isOpen;
@@ -47,7 +46,6 @@ class FilterListItem extends React.Component {
         <ListItem button onClick={this.toggleOpen} style={{paddingLeft: 0}}>
           <ListItemIcon>
             {isOpen ? <KeyboardArrowDown /> : <KeyboardArrowRight />}
-            <FilterIcon fontSize='small' style={{marginRight: 8, marginLeft: 12}} />
           </ListItemIcon>
           <ListItemText primary={label} />
           <ListItemSecondaryAction>

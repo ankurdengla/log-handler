@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 
 import LogsStore from '../../stores/LogsStore';
 import { IconButton, ListItemSecondaryAction, TextField } from '@material-ui/core';
-import { Subject as SubjectIcon, Search as SearchIcon } from '@material-ui/icons';
+import { Search as SearchIcon } from '@material-ui/icons';
 
 class LogTextFilter extends React.Component {
   constructor () {
@@ -73,7 +73,6 @@ function resetLogTextFilter () {
 
 const componentDetails = {
   label: 'Log Text',
-  icon: SubjectIcon,
   content: LogTextFilter,
   resetFunction: resetLogTextFilter
 };

@@ -6,7 +6,6 @@ import _ from 'lodash';
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import LogsStore from '../../stores/LogsStore';
-import { Description as DescriptionIcon } from '@material-ui/icons';
 
 @observer
 class FilesFilter extends React.Component {
@@ -76,7 +75,6 @@ function resetFilesFilter () {
 
 const componentDetails = {
   label: 'Files',
-  icon: DescriptionIcon,
   content: FilesFilter,
   resetFunction: resetFilesFilter,
   isExpanded: true

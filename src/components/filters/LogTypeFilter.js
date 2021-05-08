@@ -9,7 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import LogsStore from '../../stores/LogsStore';
 import { Checkbox } from '@material-ui/core';
-import { Info as InfoIcon } from '@material-ui/icons';
 
 @observer
 class LogTypeFilter extends React.Component {
@@ -88,7 +87,6 @@ function resetLogTypeFilter () {
 
 const componentDetails = {
   label: 'Log Type',
-  icon: InfoIcon,
   content: LogTypeFilter,
   resetFunction: resetLogTypeFilter
 };

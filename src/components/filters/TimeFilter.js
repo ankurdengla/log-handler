@@ -6,7 +6,6 @@ import ListItem from '@material-ui/core/ListItem';
 
 import LogsStore from '../../stores/LogsStore';
 import { TextField } from '@material-ui/core';
-import { Alarm as AlarmIcon } from '@material-ui/icons';
 
 @observer
 class TimeFilter extends React.Component {
@@ -65,7 +64,6 @@ function resetTimeFilter () {
 
 const componentDetails = {
   label: 'Time',
-  icon: AlarmIcon,
   content: TimeFilter,
   resetFunction: resetTimeFilter
 };
